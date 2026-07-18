@@ -1,7 +1,7 @@
 ════════════════════════════════════════════════════
   CHECKIP – BÁO CÁO THÔNG TIN ĐỊA CHỈ IP
 ════════════════════════════════════════════════════
-  Thời gian lưu : 15:14:47 18/7/2026
+  Thời gian lưu : 15:34:01 18/7/2026
 
 📡 THÔNG TIN IP
 ────────────────────────────────────────────────────
@@ -25,20 +25,20 @@
 ────────────────────────────────────────────────────
   Múi giờ       : Asia/Ho_Chi_Minh
   UTC offset    : +07:00
-  Giờ địa phương: 15:14:47 18/7/2026
+  Giờ địa phương: 15:34:01 18/7/2026
 
 💻 TRÌNH DUYỆT & HỆ THỐNG
 ────────────────────────────────────────────────────
   Trình duyệt   : Chrome
-  Hệ điều hành  : Android
+  Hệ điều hành  : Windows 10/11
   Ngôn ngữ máy  : vi
-  Màn hình      : 1434 × 1218 px
+  Màn hình      : 2560 × 1440 px
   Độ sâu màu    : 24-bit
   Múi giờ máy   : Asia/Bangkok
-  User-Agent    : Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36
+  User-Agent    : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
 
 ════════════════════════════════════════════════════
-  Tạo bởi CheckIP · 2026-07-18T08:14:47.650Z
+  Tạo bởi CheckIP · 2026-07-18T08:34:01.046Z
 ════════════════════════════════════════════════════
 
 

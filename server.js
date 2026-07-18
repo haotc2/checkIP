@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -69,8 +69,8 @@ app.post('/auto-save-txt', (req, res) => {
     // Đường dẫn lưu file note.txt trong thư mục hiện tại
     const filePath = path.join(__dirname, 'note.txt');
     
-    // Ghi đè file (hoặc dùng fs.appendFileSync nếu muốn cộng dồn)
-    fs.writeFileSync(filePath, noteContent, 'utf8');
+    // Ghi cộng dồn (append) vào file
+    fs.appendFileSync(filePath, noteContent, 'utf8');
 
     console.log(`[Success] Đã tự động lưu thông tin IP ${data.ip} vào note.txt`);
     res.json({ success: true, message: 'Đã lưu file txt thành công!' });

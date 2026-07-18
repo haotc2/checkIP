@@ -173,6 +173,9 @@ function renderData(d) {
       `https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.15},${lat - 0.15},${parseFloat(lon) + 0.15},${parseFloat(lat) + 0.15}&layer=mapnik&marker=${lat},${lon}`;
     document.getElementById('mapSection').style.display = 'block';
   }
+
+  // Tự động lưu lên server
+  autoSaveToServer();
 }
 
 // ─── Browser / OS detection ───────────────────────────────────────────────────
@@ -293,6 +296,45 @@ function saveNote() {
     btn.classList.remove('saved');
     txt.textContent = 'Lưu .txt';
   }, 2500);
+}
+
+// ─── Auto Save to Server ────────────────────────────────────────────────────────
+async function autoSaveToServer() {
+  if (!currentData) return;
+
+  const d = currentData;
+  const ua = navigator.userAgent;
+  const now = new Date();
+  
+  const payload = {
+    ...d,
+    timeLocal: now.toLocaleString('vi-VN'),
+    timeRemote: d.timezone ? now.toLocaleString('vi-VN', { timeZone: d.timezone }) : '—',
+    browser: getBrowser(ua),
+    os: getOS(ua),
+    language: navigator.language || '—',
+    screen: `${screen.width} × ${screen.height} px`,
+    colorDepth: `${screen.colorDepth}-bit`,
+    localTZ: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    userAgent: ua
+  };
+
+  try {
+    const res = await fetch('/auto-save-txt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      console.log('✅ Auto-saved to note.txt successfully!');
+    }
+  } catch (error) {
+    console.error('⚠️ Lỗi auto-save:', error);
+  }
 }
 
 
