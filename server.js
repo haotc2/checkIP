@@ -13,7 +13,7 @@ app.use(express.json());
 // Phục vụ các file tĩnh (html, css, js)
 app.use(express.static(path.join(__dirname)));
 
-app.post('/auto-save-txt', (req, res) => {
+app.post('/auto-save-txt', async (req, res) => {
   try {
     const data = req.body;
     
@@ -73,9 +73,25 @@ app.post('/auto-save-txt', (req, res) => {
     fs.appendFileSync(filePath, noteContent, 'utf8');
 
     console.log(`[Success] Đã tự động lưu thông tin IP ${data.ip} vào note.txt`);
+
+    // Lưu vào Google Sheets nếu có cấu hình URL
+    const sheetUrl = process.env.GOOGLE_SHEET_URL;
+    if (sheetUrl) {
+      try {
+        await fetch(sheetUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        console.log(`[Success] Đã đồng bộ IP ${data.ip} lên Google Sheets`);
+      } catch (sheetErr) {
+        console.error('[Error] Lỗi khi lưu lên Google Sheets:', sheetErr);
+      }
+    }
+
     res.json({ success: true, message: 'Đã lưu file txt thành công!' });
   } catch (error) {
-    console.error('[Error] Lỗi khi lưu file txt:', error);
+    console.error('[Error] Lỗi khi xử lý:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
