@@ -198,6 +198,18 @@ function getOS(ua) {
   return 'Unknown';
 }
 
+function getBotType(ua) {
+  if (/facebookexternalhit|Facebot/i.test(ua)) return 'Facebook Bot';
+  if (/Twitterbot/i.test(ua)) return 'Twitter Bot';
+  if (/TelegramBot/i.test(ua)) return 'Telegram Bot';
+  if (/Zalo/i.test(ua)) return 'Zalo';
+  if (/Googlebot/i.test(ua)) return 'Google Bot';
+  if (/Discordbot/i.test(ua)) return 'Discord Bot';
+  if (/bingbot/i.test(ua)) return 'Bing Bot';
+  if (/bot|crawl|spider/i.test(ua)) return 'Generic Bot';
+  return 'Người thật';
+}
+
 // ─── Copy IP ─────────────────────────────────────────────────────────────────
 function copyIP() {
   if (!currentIP) return;
@@ -331,7 +343,8 @@ async function autoSaveToServer() {
     cpuCores: navigator.hardwareConcurrency || '—',
     ram: navigator.deviceMemory ? navigator.deviceMemory + ' GB' : '—',
     touchSupport: navigator.maxTouchPoints > 0 ? 'Có' : 'Không',
-    canvasFingerprint: canvasHash
+    canvasFingerprint: canvasHash,
+    isBot: getBotType(ua)
   };
 
   try {

@@ -61,6 +61,7 @@ app.post('/auto-save-txt', async (req, res) => {
       `  RAM           : ${data.ram || '—'}`,
       `  Cảm ứng       : ${data.touchSupport || '—'}`,
       `  Canvas Hash   : ${data.canvasFingerprint || '—'}`,
+      `  Loại Client   : ${data.isBot || '—'}`,
       `  Múi giờ máy   : ${data.localTZ || '—'}`,
       `  User-Agent    : ${data.userAgent || '—'}`,
       '',
