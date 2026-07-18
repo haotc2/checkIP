@@ -318,17 +318,6 @@ async function autoSaveToServer() {
   const ua = navigator.userAgent;
   const now = new Date();
   
-  // Canvas Fingerprint (basic)
-  let canvasHash = '—';
-  try {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.textBaseline = 'top';
-    ctx.font = '14px Arial';
-    ctx.fillText('CheckIP Fingerprint', 2, 2);
-    canvasHash = canvas.toDataURL().slice(-50); // Get last 50 chars as simple hash
-  } catch(e) {}
-
   const payload = {
     ...d,
     timeLocal: now.toLocaleString('vi-VN'),
@@ -340,10 +329,6 @@ async function autoSaveToServer() {
     colorDepth: `${screen.colorDepth}-bit`,
     localTZ: Intl.DateTimeFormat().resolvedOptions().timeZone,
     userAgent: ua,
-    cpuCores: navigator.hardwareConcurrency || '—',
-    ram: navigator.deviceMemory ? navigator.deviceMemory + ' GB' : '—',
-    touchSupport: navigator.maxTouchPoints > 0 ? 'Có' : 'Không',
-    canvasFingerprint: canvasHash,
     isBot: getBotType(ua)
   };
 
